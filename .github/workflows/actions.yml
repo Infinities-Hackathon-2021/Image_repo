@@ -16,7 +16,7 @@ jobs:
     
     - name: Build Dockerfile
       run: |
-        docker build -t PHP_APP:${{ github.run_number }} ../..
+        docker build -t php_app:${{ github.run_number }} .
   
     # - name: Push Docker image
     #   run: |
