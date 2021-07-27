@@ -10,25 +10,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # steps:
-    # - uses: actions/checkout@v2
-    #   name: Checkout Code
-    
-    # - name: Build Dockerfile
-    #   run: |
-    #     docker build -t gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }} .
-  
-    # - name: Push Docker image
-    #   run: |
-    #     docker push gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }}
-
     steps:
-      - uses: actions/checkout@v2
-        name: Check out code
+    - uses: actions/checkout@v2
+      name: Checkout Code
+    
+    - name: Build Dockerfile
+      run: |
+        gcloud auth activate-service-account --key-file ${{ secrets.GCP_SA_KEY }}
+        docker build -t gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }} .
+  
+    - name: Push Docker image
+      run: |
+        docker push gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }}
 
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        with:
-          image: hack-hsp-infinities/php_app
-          registry: gcr.io
-          username: _json_key 
-          password: ${{ secrets.GCP_SA_KEY }} 
+    # steps:
+    #   - uses: actions/checkout@v2
+    #     name: Check out code
+
+    #   - uses: mr-smithers-excellent/docker-build-push@v5
+    #     with:
+    #       image: hack-hsp-infinities/php_app
+    #       registry: gcr.io
+    #       username: _json_key 
+    #       password: ${{ secrets.GCP_SA_KEY }} 
+
