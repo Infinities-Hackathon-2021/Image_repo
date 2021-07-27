@@ -14,9 +14,15 @@ jobs:
     - uses: actions/checkout@v2
       name: Checkout Code
     
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+    
     - name: Build Dockerfile
       run: |
-        gcloud auth activate-service-account --key-file ${{ secrets.GCP_SA_KEY }}
         docker build -t gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }} .
   
     - name: Push Docker image
