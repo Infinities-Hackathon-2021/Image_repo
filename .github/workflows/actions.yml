@@ -16,9 +16,9 @@ jobs:
     
     - name: Build Dockerfile
       run: |
-        docker build -t php_app:${{ github.run_number }} .
+        docker build -t gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }} .
   
-    # - name: Push Docker image
-    #   run: |
-    #     docker push gcr.io/hack-hsp-infinities/PHP_APP:${{ github.run_number }}
+    - name: Push Docker image
+      run: |
+        docker push gcr.io/hack-hsp-infinities/php_app:${{ github.run_number }}
         
