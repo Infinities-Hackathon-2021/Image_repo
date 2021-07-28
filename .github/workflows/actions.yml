@@ -36,7 +36,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: hack-hsp-infinities/php_app
-          tags: v1, latest
+          tags: v2, latest
           registry: gcr.io
           username: _json_key 
           password: ${{ secrets.GCP_SA_KEY }} 
